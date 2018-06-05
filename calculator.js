@@ -1,4 +1,6 @@
 window.onload = function() {
+// set global array
+var inputfromUser = [];
 //set global variables 
     var current,
         totalview,
@@ -6,7 +8,9 @@ window.onload = function() {
         limit,
         zero,
         period,
-        operator;
+        operator,
+        lastTotal,
+        calcResult;
 //grab the total display and set to variable
         totalview = document.getElementById("totaldisplay");
 
@@ -36,6 +40,8 @@ window.onload = function() {
             
         } // end of for loop looping thru all buttons
         var operator = document.querySelectorAll(".calcbuttonsymbol");
+
+        var operatorStore = "";
         //symbols
         for(var n = 0; n < operator.length; n++ ) {
             // for every button add a click listener
@@ -43,8 +49,43 @@ window.onload = function() {
                       
                 symbol = this.value;
                          
-                alert(symbol);     // this works but doesn't show symbol, should be ok 
-            
+                if(symbol === "+"){
+                    //store the numbers as temp variable and store + sign
+                    operatorStore = "+"; //tested and it works store operator 
+                    current = totalview.innerHTML; //tested and it works store number entered first
+                    totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
+                    
+                }
+                else if(symbol === "-"){
+                    //store the numbers as temp variable and store - sign
+                } 
+                
+                else if(symbol === "/"){
+                    //store the numbers as temp variable and store / sign
+                }
+
+                else if(symbol === "*"){
+                    //store the numbers as temp variable and store * sign
+                }
+
+                else if(symbol === "%"){
+                    //store the numbers as temp variable and store % sign
+                }
+
+                else if(symbol === "="){
+                    //return calculation
+                    console.log(operatorStore);
+                    console.log(current);
+                    console.log(totalview.innerHTML);
+                    lastTotal = totalview.innerHTML;
+                    if(operatorStore == "+"){
+                        calcResult = parseInt(current) + parseInt(lastTotal);
+                        console.log(calcResult); //returns the right number yay
+                        totalview.innerHTML = calcResult;
+                    }
+                }
+
+
             
         
            
