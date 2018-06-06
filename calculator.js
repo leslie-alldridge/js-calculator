@@ -1,6 +1,9 @@
 window.onload = function() {
 // set global array
 var inputfromUser = [];
+
+    
+
 //set global variables 
     var current,
         totalview,
@@ -11,11 +14,12 @@ var inputfromUser = [];
         operator,
         lastTotal,
         shortString,
+        numberStore,
         clearString,
         calcResult;
 //grab the total display and set to variable
         totalview = document.getElementById("totaldisplay");
-
+        totalview.innerHTML = "0";
         var allBtn = document.querySelectorAll(".calcbutton");
         
           var len = allBtn.length;
@@ -23,11 +27,18 @@ var inputfromUser = [];
           for(var i = 0; i < len; i++ ) {
             // for every button add a click listener
             allBtn[i].addEventListener("click",function() {
-                      
+                    
                 num = this.value;
-                         
+                
                 output = totalview.innerHTML +=num;
-                      
+                
+                var trimmed = output.replace(/\b0+/g, "");
+                totalview.innerHTML = trimmed;
+
+                //this is an issue if we leave a 0 on screen
+                //maybe set a variable and not use .innerhtml to add num to it. 
+                // fixed using trimmed var and regex
+                
                 limit = output.length;
              
              if(limit > 8 ) { // if too many entries entered reset screen to nothing
@@ -53,7 +64,7 @@ var inputfromUser = [];
                 clear = this.value;
                 if(clear == "ac"){
                     //clear everything
-                    totalview.innerHTML = "";
+                    totalview.innerHTML = "0";
                     operatorStore = "";
                     clear = "";
                     symbol = "";
@@ -66,21 +77,25 @@ var inputfromUser = [];
                        shortString = totalview.innerHTML;
                        clearString = shortString.substring(0,shortString.length-1);
                        totalview.innerHTML = clearString; // tested and working phew
-                }
+                        if(clearString.length < 1){
+                            totalview.innerHTML = "0";
+                        }
+                    }
             });
         }
 
         for(var n = 0; n < operator.length; n++ ) {
             // for every button add a click listener
             operator[n].addEventListener("click",function() {
-                      
+                      numberStore = totalview.innerHTML;
                 symbol = this.value;
+                
    // if user presses a symbol, store it and the number                       
                 if(symbol === "+"){
                     //store the numbers as temp variable and store + sign
                     operatorStore = "+"; //tested and it works store operator 
-                    current = totalview.innerHTML; //tested and it works store number entered first
-                    totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
+ //CHANGES                   //current = totalview.innerHTML; //tested and it works store number entered first
+                    totalview.innerHTML = "+"; // reset view to 0 so they can enter more numbers
                     
                 }
                 else if(symbol === "-"){
@@ -88,7 +103,7 @@ var inputfromUser = [];
                      //store the numbers as temp variable and store + sign
                      operatorStore = "-"; //tested and it works store operator 
                      current = totalview.innerHTML; //tested and it works store number entered first
-                     totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
+                     totalview.innerHTML = "-"; // reset view to 0 so they can enter more numbers
                 } 
                 
                 else if(symbol === "/"){
@@ -96,7 +111,7 @@ var inputfromUser = [];
                      //store the numbers as temp variable and store + sign
                      operatorStore = "/"; //tested and it works store operator 
                      current = totalview.innerHTML; //tested and it works store number entered first
-                     totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
+                     totalview.innerHTML = "/"; // reset view to 0 so they can enter more numbers
                 }
 
                 else if(symbol === "*"){
@@ -104,24 +119,33 @@ var inputfromUser = [];
                      //store the numbers as temp variable and store + sign
                      operatorStore = "*"; //tested and it works store operator 
                      current = totalview.innerHTML; //tested and it works store number entered first
-                     totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
+                     totalview.innerHTML = "*"; // reset view to 0 so they can enter more numbers
                 }
 
                 else if(symbol === "%"){
                     //store the numbers as temp variable and store % sign
                     operatorStore = "%"; //tested and it works store operator 
                      current = totalview.innerHTML; //tested and it works store number entered first
-                     totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
-                }
+                     totalview.innerHTML = "%"; // reset view to 0 so they can enter more numbers
+                    
+                    }
+                        //new double symbol
+                        else if(symbol === "*" && operatorStore !== ""){
+                            operatorStore = "*"; //tested and it works store operator 
+                     current = numberStore; //tested and it works store number entered first
+                     totalview.innerHTML = "*"; // reset view to 0 so they can enter more numbers
+                     console.log("double symbol");
+                        }
+
 // calculations start here 
                 else if(symbol === "="){
                     //return calculation
                     console.log(operatorStore);
-                    console.log(current);
+    //CHANGES                console.log(current);
                     console.log(totalview.innerHTML);
-                    lastTotal = totalview.innerHTML;
+                    //lastTotal = totalview.innerHTML;
                     if(operatorStore == "+"){
-                        calcResult = parseInt(current) + parseInt(lastTotal);
+     //CHANGES                   calcResult = parseInt(current) + parseInt(numberStore);
                         console.log(calcResult); //returns the right number yay
                         totalview.innerHTML = calcResult;
                     }
@@ -146,9 +170,10 @@ var inputfromUser = [];
                         totalview.innerHTML = calcResult + '%'; //correct - added % sign for clarity
                     }
                 }
-
-           
-         },false);
-            
+         },false);      
         }
     }
+
+    //trying to leave a leading 0 and remove it on second etc button presses 
+
+    

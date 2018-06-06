@@ -3,17 +3,18 @@ h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     
 }
-.totaldisplay {
+#totaldisplay {
     margin-bottom: 50px;
     margin-top: 20px;
     padding-top: 40px;
-    font-size: 300%;
+    font-size: 150%;
     text-align: center;
 }
 .row {
-    display: block;
+    
     margin-left: 15%;
     margin-right: 10%;
+    
     
 }
 
@@ -23,7 +24,26 @@ h1 {
     border: 1px solid darkblue;
     border-top: 2px solid blue;
     margin-top: 2px;
+    border-radius: 25px;
 }   
+
+.calcbuttonclear {
+    width: 40px;
+    height: 30px;
+    border: 1px solid darkred;
+    border-top: 2px solid red;
+    margin-top: 2px;
+    border-radius: 25px;
+}
+
+.calcbuttonsymbol {
+    border-radius: 25px;
+    width: 40px;
+    height: 30px;
+    border: 1px solid darkblue;
+    border-top: 2px solid blue;
+    margin-top: 2px;
+}
 
 .calculator {
     width: 250px;
