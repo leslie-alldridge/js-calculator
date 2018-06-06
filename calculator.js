@@ -58,18 +58,33 @@ var inputfromUser = [];
                 }
                 else if(symbol === "-"){
                     //store the numbers as temp variable and store - sign
+                     //store the numbers as temp variable and store + sign
+                     operatorStore = "-"; //tested and it works store operator 
+                     current = totalview.innerHTML; //tested and it works store number entered first
+                     totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
                 } 
                 
                 else if(symbol === "/"){
                     //store the numbers as temp variable and store / sign
+                     //store the numbers as temp variable and store + sign
+                     operatorStore = "/"; //tested and it works store operator 
+                     current = totalview.innerHTML; //tested and it works store number entered first
+                     totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
                 }
 
                 else if(symbol === "*"){
                     //store the numbers as temp variable and store * sign
+                     //store the numbers as temp variable and store + sign
+                     operatorStore = "*"; //tested and it works store operator 
+                     current = totalview.innerHTML; //tested and it works store number entered first
+                     totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
                 }
 
                 else if(symbol === "%"){
                     //store the numbers as temp variable and store % sign
+                    operatorStore = "%"; //tested and it works store operator 
+                     current = totalview.innerHTML; //tested and it works store number entered first
+                     totalview.innerHTML = ""; // reset view to 0 so they can enter more numbers
                 }
 
                 else if(symbol === "="){
@@ -82,6 +97,26 @@ var inputfromUser = [];
                         calcResult = parseInt(current) + parseInt(lastTotal);
                         console.log(calcResult); //returns the right number yay
                         totalview.innerHTML = calcResult;
+                    }
+                    else if(operatorStore == "-"){
+                        calcResult = parseInt(current) - parseInt(lastTotal);
+                        console.log(calcResult); 
+                        totalview.innerHTML = calcResult; //correct 
+                    }
+                    else if(operatorStore == "*"){
+                        calcResult = parseInt(current) * parseInt(lastTotal);
+                        console.log(calcResult); 
+                        totalview.innerHTML = calcResult; //correct answer
+                    }
+                    else if(operatorStore == "/"){
+                        calcResult = parseInt(current) / parseInt(lastTotal);
+                        console.log(calcResult); 
+                        totalview.innerHTML = calcResult; //correct answer
+                    }
+                    else if(operatorStore == "%"){
+                        calcResult = (parseInt(current) / parseInt(lastTotal)) * 100;
+                        console.log(calcResult); 
+                        totalview.innerHTML = calcResult + '%'; //correct - added % sign for clarity
                     }
                 }
 
