@@ -44,7 +44,7 @@ var inputfromUser = [];
              if(limit > 8 ) { // if too many entries entered reset screen to nothing
             
              alert("You've outgrown this calculator");
-             totalview.innerHTML = '';       
+             totalview.innerHTML = '0';       
            }
             
           
@@ -86,12 +86,12 @@ var inputfromUser = [];
 
         for(var n = 0; n < operator.length; n++ ) {
             // for every button add a click listener
-            operator[n].addEventListener("click",function() {
-                      numberStore = totalview.innerHTML;
+            operator[n].addEventListener("click",function() {  
                 symbol = this.value;
-                
+                console.log(symbol);    
    // if user presses a symbol, store it and the number                       
                 if(symbol === "+"){
+                    numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store + sign
                     operatorStore = "+"; //tested and it works store operator 
  //CHANGES                   //current = totalview.innerHTML; //tested and it works store number entered first
@@ -99,41 +99,71 @@ var inputfromUser = [];
                     
                 }
                 else if(symbol === "-"){
+                    numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store - sign
                      //store the numbers as temp variable and store + sign
                      operatorStore = "-"; //tested and it works store operator 
-                     current = totalview.innerHTML; //tested and it works store number entered first
+                    // current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "-"; // reset view to 0 so they can enter more numbers
                 } 
                 
                 else if(symbol === "/"){
+                    numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store / sign
                      //store the numbers as temp variable and store + sign
                      operatorStore = "/"; //tested and it works store operator 
-                     current = totalview.innerHTML; //tested and it works store number entered first
+                   //  current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "/"; // reset view to 0 so they can enter more numbers
                 }
 
                 else if(symbol === "*"){
+                    numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store * sign
                      //store the numbers as temp variable and store + sign
                      operatorStore = "*"; //tested and it works store operator 
-                     current = totalview.innerHTML; //tested and it works store number entered first
+                   //  current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "*"; // reset view to 0 so they can enter more numbers
                 }
 
                 else if(symbol === "%"){
+                    numberStore = totalview.innerHTML;
+                    console.log("numberstore" + numberStore);
                     //store the numbers as temp variable and store % sign
                     operatorStore = "%"; //tested and it works store operator 
-                     current = totalview.innerHTML; //tested and it works store number entered first
+                  //   current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "%"; // reset view to 0 so they can enter more numbers
                     
                     }
                         //new double symbol
-                        else if(symbol === "*" && operatorStore !== ""){
+                        else if(symbol == "*" && operatorStore !== ""){
                             operatorStore = "*"; //tested and it works store operator 
                      current = numberStore; //tested and it works store number entered first
                      totalview.innerHTML = "*"; // reset view to 0 so they can enter more numbers
+                     console.log("double symbol");
+                        }
+
+                        else if(symbol == "+" && operatorStore !== ""){
+                            operatorStore = "+"; //tested and it works store operator 
+                     current = numberStore; //tested and it works store number entered first
+                     totalview.innerHTML = "+"; // reset view to 0 so they can enter more numbers
+                     console.log("double symbol");
+                        }
+                        else if(symbol == "-" && operatorStore !== ""){
+                            operatorStore = "-"; //tested and it works store operator 
+                     current = numberStore; //tested and it works store number entered first
+                     totalview.innerHTML = "-"; // reset view to 0 so they can enter more numbers
+                     console.log("double symbol");
+                        }
+                        else if(symbol == "/" && operatorStore !== ""){
+                            operatorStore = "/"; //tested and it works store operator 
+                     current = numberStore; //tested and it works store number entered first
+                     totalview.innerHTML = "/"; // reset view to 0 so they can enter more numbers
+                     console.log("double symbol");
+                        }
+                        else if(symbol == "%" && operatorStore !== ""){
+                            operatorStore = "%"; //tested and it works store operator 
+                     current = totalview.innerHTML; //tested and it works store number entered first
+                     totalview.innerHTML = "%"; // reset view to 0 so they can enter more numbers
                      console.log("double symbol");
                         }
 
@@ -141,31 +171,43 @@ var inputfromUser = [];
                 else if(symbol === "="){
                     //return calculation
                     console.log(operatorStore);
-    //CHANGES                console.log(current);
+               console.log(current);
+               console.log(numberStore);
                     console.log(totalview.innerHTML);
                     //lastTotal = totalview.innerHTML;
                     if(operatorStore == "+"){
-     //CHANGES                   calcResult = parseInt(current) + parseInt(numberStore);
+                        current = totalview.innerHTML;
+                        current = current.substring(1);
+                        console.log("current" + current);
+             calcResult = parseInt(current) + parseInt(numberStore);
                         console.log(calcResult); //returns the right number yay
                         totalview.innerHTML = calcResult;
                     }
                     else if(operatorStore == "-"){
-                        calcResult = parseInt(current) - parseInt(lastTotal);
-                        console.log(calcResult); 
-                        totalview.innerHTML = calcResult; //correct 
+                        current = totalview.innerHTML;
+                        current = current.substring(1);
+             calcResult = parseInt(numberStore) - parseInt(current);
+                        console.log(calcResult); //returns the right number yay
+                        totalview.innerHTML = calcResult;
                     }
                     else if(operatorStore == "*"){
-                        calcResult = parseInt(current) * parseInt(lastTotal);
+                        current = totalview.innerHTML;
+                        current = current.substring(1);
+             calcResult = parseInt(numberStore) * parseInt(current);
                         console.log(calcResult); 
                         totalview.innerHTML = calcResult; //correct answer
                     }
                     else if(operatorStore == "/"){
-                        calcResult = parseInt(current) / parseInt(lastTotal);
+                        current = totalview.innerHTML;
+                        current = current.substring(1);
+             calcResult = parseInt(numberStore) / parseInt(current);
                         console.log(calcResult); 
                         totalview.innerHTML = calcResult; //correct answer
                     }
                     else if(operatorStore == "%"){
-                        calcResult = (parseInt(current) / parseInt(lastTotal)) * 100;
+                        current = totalview.innerHTML;
+                        current = current.substring(1);
+             calcResult = (parseInt(numberStore) / parseInt(current)) *100;
                         console.log(calcResult); 
                         totalview.innerHTML = calcResult + '%'; //correct - added % sign for clarity
                     }
