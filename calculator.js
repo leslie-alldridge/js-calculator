@@ -14,6 +14,7 @@ var inputfromUser = [];
         operator,
         lastTotal,
         shortString,
+        memory = 0,
         numberStore,
         decimalStore = 0,
         clearString,
@@ -90,9 +91,13 @@ var inputfromUser = [];
             operator[n].addEventListener("click",function() {  
                 symbol = this.value;
                 console.log(symbol);    
-   // if user presses a symbol, store it and the number                       
-                if(symbol === "+" && operatorStore === ""){
+   // if user presses a symbol, store it and the number  
+                
+   
+                if(symbol === "+" && operatorStore == ""){
+                    
                     numberStore = totalview.innerHTML;
+                    
                     //store the numbers as temp variable and store + sign
                     operatorStore = "+"; //tested and it works store operator 
  //CHANGES                   //current = totalview.innerHTML; //tested and it works store number entered first
@@ -186,6 +191,7 @@ var inputfromUser = [];
 // calculations start here 
                 else if(symbol === "="){
                     //return calculation
+
                     console.log(operatorStore);
                console.log(current);
                console.log(numberStore);
@@ -197,36 +203,45 @@ var inputfromUser = [];
                         console.log("current" + current);
              calcResult = parseFloat(current) + parseFloat(numberStore);
                         console.log(calcResult); //returns the right number yay
-                        totalview.innerHTML = calcResult;
+                        calcResult = calcResult.toFixed(4)
+                        totalview.innerHTML = parseFloat(calcResult); 
+                        memory = calcResult;
                     }
                     else if(operatorStore == "-"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
              calcResult = parseFloat(numberStore) - parseFloat(current);
                         console.log(calcResult); //returns the right number yay
-                        totalview.innerHTML = calcResult;
+                        calcResult = calcResult.toFixed(4)
+                        totalview.innerHTML = parseFloat(calcResult); 
                     }
                     else if(operatorStore == "*"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
              calcResult = parseFloat(numberStore) * parseFloat(current);
                         console.log(calcResult); 
-                        totalview.innerHTML = calcResult; //correct answer
+                        calcResult = calcResult.toFixed(4)
+                        totalview.innerHTML = parseFloat(calcResult);  //correct answer
                     }
                     else if(operatorStore == "/"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
              calcResult = parseFloat(numberStore) / parseFloat(current);
                         console.log(calcResult); 
-                        totalview.innerHTML = calcResult; //correct answer
+                        calcResult = calcResult.toFixed(4)
+                        totalview.innerHTML = parseFloat(calcResult);  //correct answer
                     }
                     else if(operatorStore == "%"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
+
              calcResult = (parseFloat(numberStore) / parseFloat(current)) *100;
                         console.log(calcResult); 
-                        totalview.innerHTML = calcResult + '%'; //correct - added % sign for clarity
+                    
+                        calcResult = calcResult.toFixed(4)
+                        totalview.innerHTML = parseFloat(calcResult) + '%'; //correct - added % sign for clarity
                     }
+                    
                 }
          },false);      
         }
