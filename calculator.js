@@ -15,6 +15,7 @@ var inputfromUser = [];
         lastTotal,
         shortString,
         numberStore,
+        decimalStore = 0,
         clearString,
         calcResult;
 //grab the total display and set to variable
@@ -90,7 +91,7 @@ var inputfromUser = [];
                 symbol = this.value;
                 console.log(symbol);    
    // if user presses a symbol, store it and the number                       
-                if(symbol === "+"){
+                if(symbol === "+" && operatorStore === ""){
                     numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store + sign
                     operatorStore = "+"; //tested and it works store operator 
@@ -98,7 +99,7 @@ var inputfromUser = [];
                     totalview.innerHTML = "+"; // reset view to 0 so they can enter more numbers
                     
                 }
-                else if(symbol === "-"){
+                else if(symbol === "-" && operatorStore === ""){
                     numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store - sign
                      //store the numbers as temp variable and store + sign
@@ -107,7 +108,7 @@ var inputfromUser = [];
                      totalview.innerHTML = "-"; // reset view to 0 so they can enter more numbers
                 } 
                 
-                else if(symbol === "/"){
+                else if(symbol === "/" && operatorStore === ""){
                     numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store / sign
                      //store the numbers as temp variable and store + sign
@@ -116,7 +117,7 @@ var inputfromUser = [];
                      totalview.innerHTML = "/"; // reset view to 0 so they can enter more numbers
                 }
 
-                else if(symbol === "*"){
+                else if(symbol === "*" && operatorStore === ""){
                     numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store * sign
                      //store the numbers as temp variable and store + sign
@@ -125,7 +126,7 @@ var inputfromUser = [];
                      totalview.innerHTML = "*"; // reset view to 0 so they can enter more numbers
                 }
 
-                else if(symbol === "%"){
+                else if(symbol === "%" && operatorStore === ""){
                     numberStore = totalview.innerHTML;
                     console.log("numberstore" + numberStore);
                     //store the numbers as temp variable and store % sign
@@ -134,7 +135,7 @@ var inputfromUser = [];
                      totalview.innerHTML = "%"; // reset view to 0 so they can enter more numbers
                     
                     }
-                        //new double symbol
+                        //new double symbol tested
                         else if(symbol == "*" && operatorStore !== ""){
                             operatorStore = "*"; //tested and it works store operator 
                      current = numberStore; //tested and it works store number entered first
@@ -167,6 +168,21 @@ var inputfromUser = [];
                      console.log("double symbol");
                         }
 
+
+                        //decimals 
+                        else if(symbol == "." && decimalStore === 0){
+                            totalview.innerHTML += this.value;
+                            decimalStore = 1;
+                            console.log("one dec");
+                        }
+                        else if(symbol == "." && decimalStore === 1){
+                            alert("only one decimal please");
+                            decimalStore === 1;
+                            console.log("two dec");
+                        }
+
+                        // need to clear decimal store when user cliks +-*/%
+
 // calculations start here 
                 else if(symbol === "="){
                     //return calculation
@@ -179,35 +195,35 @@ var inputfromUser = [];
                         current = totalview.innerHTML;
                         current = current.substring(1);
                         console.log("current" + current);
-             calcResult = parseInt(current) + parseInt(numberStore);
+             calcResult = parseFloat(current) + parseFloat(numberStore);
                         console.log(calcResult); //returns the right number yay
                         totalview.innerHTML = calcResult;
                     }
                     else if(operatorStore == "-"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
-             calcResult = parseInt(numberStore) - parseInt(current);
+             calcResult = parseFloat(numberStore) - parseFloat(current);
                         console.log(calcResult); //returns the right number yay
                         totalview.innerHTML = calcResult;
                     }
                     else if(operatorStore == "*"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
-             calcResult = parseInt(numberStore) * parseInt(current);
+             calcResult = parseFloat(numberStore) * parseFloat(current);
                         console.log(calcResult); 
                         totalview.innerHTML = calcResult; //correct answer
                     }
                     else if(operatorStore == "/"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
-             calcResult = parseInt(numberStore) / parseInt(current);
+             calcResult = parseFloat(numberStore) / parseFloat(current);
                         console.log(calcResult); 
                         totalview.innerHTML = calcResult; //correct answer
                     }
                     else if(operatorStore == "%"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
-             calcResult = (parseInt(numberStore) / parseInt(current)) *100;
+             calcResult = (parseFloat(numberStore) / parseFloat(current)) *100;
                         console.log(calcResult); 
                         totalview.innerHTML = calcResult + '%'; //correct - added % sign for clarity
                     }
