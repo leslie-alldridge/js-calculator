@@ -89,6 +89,18 @@ function clearDecimal (){
                         }
                         clearDecimal();
                     }
+                    else if(clear == "off"){
+                        if(this.innerHTML == "Off"){
+                        this.innerHTML = "On";
+                        totalview.innerHTML = "";
+                        }
+                        else if(this.innerHTML == "On"){
+                            this.innerHTML = "Off";
+                            totalview.innerHTML = "0";
+                        }
+
+                
+                    }
             });
         }
         
