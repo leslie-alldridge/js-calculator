@@ -2,7 +2,10 @@ window.onload = function() {
 // set global array
 var inputfromUser = [];
 
-    
+function clearDecimal (){
+    decimalStore = 0;
+    console.log('store');
+}
 
 //set global variables 
     var current,
@@ -73,6 +76,8 @@ var inputfromUser = [];
                     current = "";
                     lastTotal = "";
                     calcResult = "";
+                    memory = 0;
+                    clearDecimal();
                     //tested and works
                 }
                 else if(clear == "ce"){
@@ -82,10 +87,11 @@ var inputfromUser = [];
                         if(clearString.length < 1){
                             totalview.innerHTML = "0";
                         }
+                        clearDecimal();
                     }
             });
         }
-
+        
         for(var n = 0; n < operator.length; n++ ) {
             // for every button add a click listener
             operator[n].addEventListener("click",function() {  
@@ -95,50 +101,99 @@ var inputfromUser = [];
                 
    
                 if(symbol === "+" && operatorStore == ""){
-                    
-                    numberStore = totalview.innerHTML;
+                    //memorystore checker
+                    if (memory !== 0){
+                        numberStore = memory;
+                        totalview.innerHTML = "+"
+                        operatorStore = "+"
+                        console.log("memory stored");
+                    }
+
+                    else{
+                        numberStore = totalview.innerHTML;
                     
                     //store the numbers as temp variable and store + sign
                     operatorStore = "+"; //tested and it works store operator 
  //CHANGES                   //current = totalview.innerHTML; //tested and it works store number entered first
-                    totalview.innerHTML = "+"; // reset view to 0 so they can enter more numbers
-                    
+                    totalview.innerHTML = "+";
+                    }
+                     // reset view to 0 so they can enter more numbers
+                    clearDecimal();
                 }
                 else if(symbol === "-" && operatorStore === ""){
+                    //memorystore checker
+                    if (memory !== 0){
+                        numberStore = memory;
+                        totalview.innerHTML = "-"
+                        operatorStore = "-"
+                        console.log("memory stored");
+                    }
+                    else {
                     numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store - sign
                      //store the numbers as temp variable and store + sign
                      operatorStore = "-"; //tested and it works store operator 
                     // current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "-"; // reset view to 0 so they can enter more numbers
-                } 
+                    }
+                     clearDecimal();
+                    } 
                 
                 else if(symbol === "/" && operatorStore === ""){
+                    //memorystore checker
+                    if (memory !== 0){
+                        numberStore = memory;
+                        totalview.innerHTML = "/"
+                        operatorStore = "/"
+                        console.log("memory stored");
+                    }
+                    else{
                     numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store / sign
                      //store the numbers as temp variable and store + sign
                      operatorStore = "/"; //tested and it works store operator 
                    //  current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "/"; // reset view to 0 so they can enter more numbers
-                }
+                    }
+                     clearDecimal();
+                    }
 
                 else if(symbol === "*" && operatorStore === ""){
+                    //memorystore checker
+                    if (memory !== 0){
+                        numberStore = memory;
+                        totalview.innerHTML = "*"
+                        operatorStore = "*"
+                        console.log("memory stored");
+                    }
+                    else {
                     numberStore = totalview.innerHTML;
                     //store the numbers as temp variable and store * sign
                      //store the numbers as temp variable and store + sign
                      operatorStore = "*"; //tested and it works store operator 
                    //  current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "*"; // reset view to 0 so they can enter more numbers
-                }
+                    }
+                     clearDecimal();
+                    }
 
                 else if(symbol === "%" && operatorStore === ""){
+                    //memorystore checker
+                    if (memory !== 0){
+                        numberStore = memory;
+                        totalview.innerHTML = "%"
+                        operatorStore = "%"
+                        console.log("memory stored");
+                    }
+                    else {
                     numberStore = totalview.innerHTML;
                     console.log("numberstore" + numberStore);
                     //store the numbers as temp variable and store % sign
                     operatorStore = "%"; //tested and it works store operator 
                   //   current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "%"; // reset view to 0 so they can enter more numbers
-                    
+                    }
+                     clearDecimal();
                     }
                         //new double symbol tested
                         else if(symbol == "*" && operatorStore !== ""){
@@ -146,6 +201,7 @@ var inputfromUser = [];
                      current = numberStore; //tested and it works store number entered first
                      totalview.innerHTML = "*"; // reset view to 0 so they can enter more numbers
                      console.log("double symbol");
+                     clearDecimal();
                         }
 
                         else if(symbol == "+" && operatorStore !== ""){
@@ -153,24 +209,28 @@ var inputfromUser = [];
                      current = numberStore; //tested and it works store number entered first
                      totalview.innerHTML = "+"; // reset view to 0 so they can enter more numbers
                      console.log("double symbol");
+                     clearDecimal();
                         }
                         else if(symbol == "-" && operatorStore !== ""){
                             operatorStore = "-"; //tested and it works store operator 
                      current = numberStore; //tested and it works store number entered first
                      totalview.innerHTML = "-"; // reset view to 0 so they can enter more numbers
                      console.log("double symbol");
+                     clearDecimal();
                         }
                         else if(symbol == "/" && operatorStore !== ""){
                             operatorStore = "/"; //tested and it works store operator 
                      current = numberStore; //tested and it works store number entered first
                      totalview.innerHTML = "/"; // reset view to 0 so they can enter more numbers
                      console.log("double symbol");
+                     clearDecimal();
                         }
                         else if(symbol == "%" && operatorStore !== ""){
                             operatorStore = "%"; //tested and it works store operator 
                      current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "%"; // reset view to 0 so they can enter more numbers
                      console.log("double symbol");
+                     clearDecimal();
                         }
 
 
@@ -182,16 +242,24 @@ var inputfromUser = [];
                         }
                         else if(symbol == "." && decimalStore === 1){
                             alert("only one decimal please");
-                            decimalStore === 1;
+                            decimalStore = 1;
+                            
                             console.log("two dec");
                         }
 
+                        // if (memory !== 0){
+                        //     current = memory;
+                        // }
+
+                        // else{
+
+                        // }
                         // need to clear decimal store when user cliks +-*/%
 
 // calculations start here 
                 else if(symbol === "="){
                     //return calculation
-
+                    clearDecimal();
                     console.log(operatorStore);
                console.log(current);
                console.log(numberStore);
@@ -205,7 +273,7 @@ var inputfromUser = [];
                         console.log(calcResult); //returns the right number yay
                         calcResult = calcResult.toFixed(4)
                         totalview.innerHTML = parseFloat(calcResult); 
-                        memory = calcResult;
+                        
                     }
                     else if(operatorStore == "-"){
                         current = totalview.innerHTML;
@@ -241,7 +309,14 @@ var inputfromUser = [];
                         calcResult = calcResult.toFixed(4)
                         totalview.innerHTML = parseFloat(calcResult) + '%'; //correct - added % sign for clarity
                     }
-                    
+                    memory = parseFloat(calcResult);
+                    console.log(memory);
+                    operatorStore = "";
+                    clear = "";
+                    symbol = "";
+                    current = "";
+                    lastTotal = "";
+                    calcResult = "";
                 }
          },false);      
         }
