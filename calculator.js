@@ -4,7 +4,6 @@ var inputfromUser = [];
 
 function clearDecimal (){
     decimalStore = 0;
-    console.log('store');
 }
 
 //set global variables 
@@ -50,7 +49,9 @@ function clearDecimal (){
             
              alert("You've outgrown this calculator");
              totalview.innerHTML = '0';       
-           }
+            }
+
+            
             
           
            
@@ -92,7 +93,7 @@ function clearDecimal (){
                     else if(clear == "off"){
                         if(this.innerHTML == "Off"){
                         this.innerHTML = "On";
-                        totalview.innerHTML = "";
+                        totalview.innerHTML = "Press On";
                         }
                         else if(this.innerHTML == "On"){
                             this.innerHTML = "Off";
@@ -108,7 +109,6 @@ function clearDecimal (){
             // for every button add a click listener
             operator[n].addEventListener("click",function() {  
                 symbol = this.value;
-                console.log(symbol);    
    // if user presses a symbol, store it and the number  
                 
    
@@ -118,7 +118,6 @@ function clearDecimal (){
                         numberStore = memory;
                         totalview.innerHTML = "+"
                         operatorStore = "+"
-                        console.log("memory stored");
                     }
 
                     else{
@@ -138,7 +137,6 @@ function clearDecimal (){
                         numberStore = memory;
                         totalview.innerHTML = "-"
                         operatorStore = "-"
-                        console.log("memory stored");
                     }
                     else {
                     numberStore = totalview.innerHTML;
@@ -157,7 +155,6 @@ function clearDecimal (){
                         numberStore = memory;
                         totalview.innerHTML = "/"
                         operatorStore = "/"
-                        console.log("memory stored");
                     }
                     else{
                     numberStore = totalview.innerHTML;
@@ -176,7 +173,6 @@ function clearDecimal (){
                         numberStore = memory;
                         totalview.innerHTML = "*"
                         operatorStore = "*"
-                        console.log("memory stored");
                     }
                     else {
                     numberStore = totalview.innerHTML;
@@ -195,11 +191,9 @@ function clearDecimal (){
                         numberStore = memory;
                         totalview.innerHTML = "%"
                         operatorStore = "%"
-                        console.log("memory stored");
                     }
                     else {
                     numberStore = totalview.innerHTML;
-                    console.log("numberstore" + numberStore);
                     //store the numbers as temp variable and store % sign
                     operatorStore = "%"; //tested and it works store operator 
                   //   current = totalview.innerHTML; //tested and it works store number entered first
@@ -212,7 +206,6 @@ function clearDecimal (){
                             operatorStore = "*"; //tested and it works store operator 
                      current = numberStore; //tested and it works store number entered first
                      totalview.innerHTML = "*"; // reset view to 0 so they can enter more numbers
-                     console.log("double symbol");
                      clearDecimal();
                         }
 
@@ -220,28 +213,24 @@ function clearDecimal (){
                             operatorStore = "+"; //tested and it works store operator 
                      current = numberStore; //tested and it works store number entered first
                      totalview.innerHTML = "+"; // reset view to 0 so they can enter more numbers
-                     console.log("double symbol");
                      clearDecimal();
                         }
                         else if(symbol == "-" && operatorStore !== ""){
                             operatorStore = "-"; //tested and it works store operator 
                      current = numberStore; //tested and it works store number entered first
                      totalview.innerHTML = "-"; // reset view to 0 so they can enter more numbers
-                     console.log("double symbol");
                      clearDecimal();
                         }
                         else if(symbol == "/" && operatorStore !== ""){
                             operatorStore = "/"; //tested and it works store operator 
                      current = numberStore; //tested and it works store number entered first
                      totalview.innerHTML = "/"; // reset view to 0 so they can enter more numbers
-                     console.log("double symbol");
                      clearDecimal();
                         }
                         else if(symbol == "%" && operatorStore !== ""){
                             operatorStore = "%"; //tested and it works store operator 
                      current = totalview.innerHTML; //tested and it works store number entered first
                      totalview.innerHTML = "%"; // reset view to 0 so they can enter more numbers
-                     console.log("double symbol");
                      clearDecimal();
                         }
 
@@ -250,39 +239,24 @@ function clearDecimal (){
                         else if(symbol == "." && decimalStore === 0){
                             totalview.innerHTML += this.value;
                             decimalStore = 1;
-                            console.log("one dec");
                         }
                         else if(symbol == "." && decimalStore === 1){
                             alert("only one decimal please");
                             decimalStore = 1;
                             
-                            console.log("two dec");
                         }
 
-                        // if (memory !== 0){
-                        //     current = memory;
-                        // }
-
-                        // else{
-
-                        // }
-                        // need to clear decimal store when user cliks +-*/%
-
+                        
 // calculations start here 
                 else if(symbol === "="){
                     //return calculation
                     clearDecimal();
-                    console.log(operatorStore);
-               console.log(current);
-               console.log(numberStore);
-                    console.log(totalview.innerHTML);
-                    //lastTotal = totalview.innerHTML;
+            
+
                     if(operatorStore == "+"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
-                        console.log("current" + current);
-             calcResult = parseFloat(current) + parseFloat(numberStore);
-                        console.log(calcResult); //returns the right number yay
+                        calcResult = parseFloat(current) + parseFloat(numberStore);
                         calcResult = calcResult.toFixed(4)
                         totalview.innerHTML = parseFloat(calcResult); 
                         
@@ -290,39 +264,32 @@ function clearDecimal (){
                     else if(operatorStore == "-"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
-             calcResult = parseFloat(numberStore) - parseFloat(current);
-                        console.log(calcResult); //returns the right number yay
+                        calcResult = parseFloat(numberStore) - parseFloat(current);
                         calcResult = calcResult.toFixed(4)
                         totalview.innerHTML = parseFloat(calcResult); 
                     }
                     else if(operatorStore == "*"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
-             calcResult = parseFloat(numberStore) * parseFloat(current);
-                        console.log(calcResult); 
+                        calcResult = parseFloat(numberStore) * parseFloat(current);
                         calcResult = calcResult.toFixed(4)
                         totalview.innerHTML = parseFloat(calcResult);  //correct answer
                     }
                     else if(operatorStore == "/"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
-             calcResult = parseFloat(numberStore) / parseFloat(current);
-                        console.log(calcResult); 
+                        calcResult = parseFloat(numberStore) / parseFloat(current);
                         calcResult = calcResult.toFixed(4)
                         totalview.innerHTML = parseFloat(calcResult);  //correct answer
                     }
                     else if(operatorStore == "%"){
                         current = totalview.innerHTML;
                         current = current.substring(1);
-
-             calcResult = (parseFloat(numberStore) / parseFloat(current)) *100;
-                        console.log(calcResult); 
-                    
+                        calcResult = (parseFloat(numberStore) / parseFloat(current)) *100;                    
                         calcResult = calcResult.toFixed(4)
                         totalview.innerHTML = parseFloat(calcResult) + '%'; //correct - added % sign for clarity
                     }
                     memory = parseFloat(calcResult);
-                    console.log(memory);
                     operatorStore = "";
                     clear = "";
                     symbol = "";
@@ -334,6 +301,5 @@ function clearDecimal (){
         }
     }
 
-    //trying to leave a leading 0 and remove it on second etc button presses 
 
     
